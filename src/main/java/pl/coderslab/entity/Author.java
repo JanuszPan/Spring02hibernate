@@ -1,6 +1,9 @@
 package pl.coderslab.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "authors")
@@ -9,7 +12,12 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 1)
+//    @NotEmpty
     private String firstName;
+    @NotNull
+    @Size(min = 1)
     private String lastName;
 //    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
 //    private List<Book> books = new ArrayList<>();

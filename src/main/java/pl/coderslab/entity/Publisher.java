@@ -6,6 +6,11 @@ import javax.persistence.*;
 @Table(name="publishers")
 public class Publisher {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+
     public Long getId() {
         return id;
     }
@@ -21,12 +26,6 @@ public class Publisher {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-
 
     @Override
     public String toString() {
