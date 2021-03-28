@@ -3,6 +3,7 @@ package pl.coderslab.app;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import pl.coderslab.converter.StringToAuthorConverter;
+import pl.coderslab.repository.BookRepository;
 
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;
@@ -26,6 +28,7 @@ import java.util.Locale;
 //@ComponentScan(basePackageClasses = {BookDao.class, BookController.class})
 //@ComponentScan(basePackages = "pl.coderslab.dao", "pl.coderslab.controller")
 @ComponentScan(basePackages = "pl.coderslab")
+@EnableJpaRepositories(basePackageClasses = BookRepository.class)//wystarczy jeden przedstawiciel z pakietu
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
 

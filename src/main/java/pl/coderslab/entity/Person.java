@@ -1,6 +1,9 @@
 package pl.coderslab.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "person")
@@ -8,9 +11,19 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min=3)
     private String login;
+
+    @NotNull
+    @Size(min=6, max=12)
     private String password;
+
+    @NotNull
+    @Email
     private String email;
+
     public Long getId() {
         return id;
     }

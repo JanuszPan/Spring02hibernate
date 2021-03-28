@@ -13,8 +13,8 @@
             <td>${book.rating}</td>
             <td>${book.description}</td>
             <td>${book.publisher.name}</td>
-            <td><a href="/form/book/delete/{id}" ${book.id}>Usuń</a>a></td>
-            <td><a href="/form/book/edit/?=${book.id}>Edytuj</a></td>
+            <td><a href="/form/book/delete?id=${book.id}">Usuń</a></td>
+            <td><a href="/form/book/edit?id=${book.id}">Edytuj</a></td>
         </tr>
     </c:forEach>
 </table>

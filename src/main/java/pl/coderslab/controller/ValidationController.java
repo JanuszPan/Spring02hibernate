@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class ValidationController {
     private final Validator validator;
     public ValidationController(Validator validator) {
+
         this.validator = validator;
     }
     @GetMapping(path = "/validate", produces = "text/plain;charset=UTF-8")

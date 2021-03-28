@@ -1,6 +1,9 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,13 +15,39 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     @Size(min = 1)
 //    @NotEmpty
     private String firstName;
+
     @NotNull
     @Size(min = 1)
     private String lastName;
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @NotNull
+    @PESEL
+    private String pesel;
+
+    @Email
+    private String email;
+
 //    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
 //    private List<Book> books = new ArrayList<>();
 
