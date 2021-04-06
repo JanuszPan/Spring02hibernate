@@ -3,10 +3,7 @@ package pl.coderslab.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.other.Student;
 
 import java.util.Arrays;
@@ -23,6 +20,7 @@ public class StudentController {
     }
 
     @PostMapping(path = "/student", produces = "text/plain;charset=UTF-8")
+    @ResponseBody
     String StudentForm(@ModelAttribute("student") Student student) {
         return student.toString();
     }
