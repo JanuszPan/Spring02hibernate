@@ -45,7 +45,7 @@ public class BookFormController {
 
     //Listę książek dla zadanego autora.
     @GetMapping(path = "form/book/searchAuthor", produces = "text/html;charset=UTF-8")
-    String indAllByAuthors(@RequestParam("authorID") Long id, Model model) {
+    String findAllByAuthors(@RequestParam("authorID") Long id, Model model) {
         Author author=new Author();
         author.setId(id);
         List<Book> books = bookRepository.findAllByAuthors(author);
