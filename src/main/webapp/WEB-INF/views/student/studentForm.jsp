@@ -7,7 +7,7 @@
 <body>
 <%--@elvariable id="student" type=""--%>
 <form:form method="post" modelAttribute="student">
-    FirstName: <form:input path="firstName"/><br>
+    FirstName: <form:input path="firstName"/><br><br>
     LastName: <form:input path="lastName"/><br><br>
     Gender: Male: <form:radiobutton path="gender" value="M"/>
     Female: <form:radiobutton path="gender" value="F"/><br><br>
@@ -15,9 +15,9 @@
     <form:select path="country">
         <form:options items="${countries}"/>
     </form:select><br><br>
-    Notes: <br> <form:textarea path="notes"/><br>
-    Mailing list: <form:checkbox path="mailingList"/><br>
-    Programming skills: <br>
+    Notes: <br> <form:textarea path="notes"/><br><br>
+    Mailing list: <form:checkbox path="mailingList"/><br><br>
+    Programming skills: <br><br>
     <form:select path="programmingSkills" multiple="true">
         <form:options items="${programmingSkills}"/>
     </form:select><br><br>
