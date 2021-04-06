@@ -17,7 +17,8 @@ public class PersonController {
 
     @GetMapping(path = "/showPersonForm", produces = "text/plain;charset=UTF-8")
     String showPersonForm() {
-        return "personForm";
+
+        return "person/personForm";
     }
     @PostMapping(path = "/savePersonForm", produces = "text/plain;charset=UTF-8")
     @ResponseBody
