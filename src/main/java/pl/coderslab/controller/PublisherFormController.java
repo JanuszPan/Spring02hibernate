@@ -39,7 +39,7 @@ public class PublisherFormController {
             return "publisher/add";
         }
         publisherDao.create(publisher);
-        return "redirect:/publisher/aa";
+        return "redirect:/publisher/add";
 //        return "redirect:books";
 
     }

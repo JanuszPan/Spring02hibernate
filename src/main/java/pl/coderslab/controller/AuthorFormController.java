@@ -55,7 +55,7 @@ public class AuthorFormController {
     @PostMapping(path = "form/author/edit", produces = "text/html;charset=UTF-8")
     String editAuthor(Author author) {
         authorDao.update(author);
-        return "redirect:author/edit";
+        return "redirect:/author/edit";
     }
 
     @ModelAttribute("publishers")
