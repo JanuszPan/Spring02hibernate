@@ -10,7 +10,7 @@ import pl.coderslab.entity.Author;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/authors", produces = "text/html;charset=utf-8")
+@RequestMapping(value = "/authors", produces = "text/plain;charset=utf-8")
 public class AuthorController {
 
     private AuthorDao authorDao;

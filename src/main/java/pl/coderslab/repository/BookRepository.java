@@ -1,6 +1,8 @@
 package pl.coderslab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Category;
@@ -18,10 +20,15 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //metodę wyszukującą książki dla zadanej kategorii
     List<Book> findAllByCategory(Category category);
 
+    //metodę wyszukującą książki dla zadanej kategorii
+    @Query("select b from Book b where b.category = :category")
+    Book findByCat(@Param("category") Category category);
+
     //metodę wyszukującą książki dla zadanego id kategorii
     List<Book> findAllByCategoryId(Long id);
 
     List<Book> findAllByTitleLike(String title);
+
     //Listę książek dla określonego autora
     List<Book> findAllByAuthors(Author author);
 
@@ -34,6 +41,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //Pierwszą książkę z zadanej kategorii, z sortowaniem po tytule.
     Book findFirstByCategoryOrderByTitle(Category category);
+
+
 }
 
 //Stwórz encję Category i połącz ją relacją z Book. Książka ma jedną kategorię.
