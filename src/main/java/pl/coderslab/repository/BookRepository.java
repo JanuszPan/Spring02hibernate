@@ -8,6 +8,7 @@ import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Category;
 import pl.coderslab.entity.Publisher;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 // Spring Data zastępuje BookDao CRTL+F12 - można przeglądnąć wszystkie odziedziczone metody
@@ -42,10 +43,21 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //Pierwszą książkę z zadanej kategorii, z sortowaniem po tytule.
     Book findFirstByCategoryOrderByTitle(Category category);
 
+    @Query("select b from Book b where  b.rating between :min and :max")
+    List<Book> findByRat(@Param("rating") int min, int max);
 
+    @Query("select b from Book b where b.publisher.name=?1")
+    List<Book> findByPub(String publisherName);
+
+    @Query(value = "select  b from Book b where b.category = :category order by b.title")
+    List<Book> booksbyTitleLimit(@Param("category") Category category, Pageable pageable);
+
+//    @Query(value = "SELECT * FROM books b JOIN category c on b.category_id = c.id where c.name = :categoryName ORDER BY b.title LIMIT 1",
+//            nativeQuery = true)
+//    List<Book> booksByCategoryNameLimit1(@Param("categoryName") String categoryName);
 }
-
 //Stwórz encję Category i połącz ją relacją z Book. Książka ma jedną kategorię.
-//W repozytorium dla klasy Book utwórz metody pobierające:
-
+//Listę książek dla których rating jest pomiędzy zadanymi parametrami np. między 3 a 5.
+//        Listę książek dla zadanego wydawcy.
+//        Pierwszą książkę z zadanej kategorii, z sortowaniem po tytule.
 
