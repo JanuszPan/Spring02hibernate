@@ -40,7 +40,7 @@ public class AuthorFormController {
             return "author/add";
         }
         authorDao.create(author);
-        return "redirect:/author/add";
+        return "redirect:/form/authors";
 //        return "redirect:author";
 
     }
@@ -49,7 +49,7 @@ public class AuthorFormController {
     String showAllAuthors(Model model) {
         List<Author> authors = authorDao.findAll();
         model.addAttribute("authors", authors);
-        return "authors/all";
+        return "author/all";
     }
 
     @PostMapping(path = "form/author/edit", produces = "text/html;charset=UTF-8")
