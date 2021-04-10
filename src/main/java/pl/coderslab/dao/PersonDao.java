@@ -15,14 +15,19 @@ public class PersonDao {
     EntityManager entityManager;
 
     public void create(Person person){
+
         entityManager.persist(person);
     }
 
     public void update(Person person){
+
         entityManager.merge(person);
     }
 
-    public Person read(long id){
+    public Person findById(long id){
+//        Person person;
+//        person=entityManager.find(Person.class, id);
+//        return person;
         return entityManager.find(Person.class, id);
     }
 

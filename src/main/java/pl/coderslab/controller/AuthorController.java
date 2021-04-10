@@ -19,17 +19,22 @@ public class AuthorController {
         this.authorDao = authorDao;
     }
 
-    @RequestMapping(value = "/add/{firstName}/{lastName}")
+    @RequestMapping(value = "/add/{firstName}/{lastName}/{pesel}/{email}")
     @ResponseBody
-    public String saveAuthor(@PathVariable String firstName, @PathVariable String lastName) {
+    public String saveAuthor(@PathVariable String firstName,
+                             @PathVariable String lastName,
+                             @PathVariable String pesel,
+                             @PathVariable String email) {
         Author author = new Author();
         author.setFirstName(firstName);
         author.setLastName(lastName);
+        author.setPesel(pesel);
+        author.setEmail(email);
         authorDao.create(author);
         return "Utworzono " + author.toString();
     }
 
-    @RequestMapping(value = "/update/{id:\\d+}/{firstName}/{lastName}")
+    @RequestMapping(value = "/update/{id}/{firstName}/{lastName}")
     @ResponseBody
     public String editAuthor(@PathVariable long id, @PathVariable String firstName, @PathVariable String lastName) {
         Author author = authorDao.read(id);
@@ -42,6 +47,7 @@ public class AuthorController {
     @RequestMapping(value = "/read/{id:\\d+}")
     @ResponseBody
     public String findAuthor(@PathVariable long id) {
+
         return authorDao.read(id).toString();
     }
 

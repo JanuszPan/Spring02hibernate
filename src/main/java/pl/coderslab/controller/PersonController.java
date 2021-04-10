@@ -52,12 +52,12 @@ public class PersonController {
     @RequestMapping("/person/get/{id}")
     @ResponseBody
     public String getPerson(@PathVariable long id){
-        Person person = personDao.read(id);
+        Person person = personDao.findById(id);
         return person.toString();
     }
     @RequestMapping("/person/{id}")
     public String updatePerson(@PathVariable long id){
-        Person person= personDao.read(id);
+        Person person= personDao.findById(id);
         person.setLogin("login1");
         person.setEmail("email1");
         personDao.update(person);
@@ -65,7 +65,7 @@ public class PersonController {
     }
     @RequestMapping("/person/delete/{id}")
     public String deletePerson(@PathVariable long id){
-        Person author = personDao.read(id);
+        Person author = personDao.findById(id);
         personDao.delete(author);
         return "Person deleted";
     }

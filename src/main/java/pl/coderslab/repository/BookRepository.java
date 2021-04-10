@@ -9,6 +9,7 @@ import pl.coderslab.entity.Publisher;
 import java.util.List;
 
 // Spring Data zastępuje BookDao CRTL+F12 - można przeglądnąć wszystkie odziedziczone metody
+//jedno repozytorium odpowiada za obsługę jeden encji
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     //metodę wyszukującą książki dla zadanego tytułu.

@@ -9,15 +9,17 @@ import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Book;
 import pl.coderslab.entity.Publisher;
+import pl.coderslab.repository.BookRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-@RestController
+@RestController//zadaniem kontrlera jest otrzymanie zapytania HTTP i wygenerowanie odpowiedzi.
 @RequestMapping(produces = "application/json; charset=UTF-8")
 public class BookController {
-    private static final String BOOK_NOT_FOUND_MESSAGE="Nie znaleziono książki o podanym Id";
+    private static final String BOOK_NOT_FOUND_MESSAGE = "Nie znaleziono książki o podanym Id";
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
@@ -29,11 +31,12 @@ public class BookController {
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
     }
+
     //POST
     @PostMapping("/book/add")
-    @ResponseBody
+    @ResponseBody//Adnotacja @ResponseBody - wskazuje, że nie przekazujemy informacji do widoku tylko zwracamy zawartość bezpośrednio.
     public String newBook(
-            @RequestParam("title") String title,
+            @RequestParam("title") String title,//@RequestParam zastępuje HttpServletRequest do przekazywania parametrów
             @RequestParam("rating") int rating,
             @RequestParam("description") String description) {
 
@@ -58,31 +61,34 @@ public class BookController {
 
         bookDao.create(book);//wywołanie metody utworzonej w klasie BookDao
         // do obiektu pobieramy nadany podczas zapisu identyfikator id
-        return "Id nowej książki: " + book.getId() + " Tytuł nowej książki to: " + book.getTitle() + " rating nowej książki to: "+book.getRating()+ " Opis nowej książki to: "+book.getDescription();
+        return "Id nowej książki: " + book.getId() + " Tytuł nowej książki to: " + book.getTitle() + " rating nowej książki to: " + book.getRating() + " Opis nowej książki to: " + book.getDescription();
     }
+
     //GET
-    @GetMapping(path = "/book/get")
+    @GetMapping(path = "/book/get")//zamiast path można użyć value
     @ResponseBody
     public String getBook(@RequestParam("id") long id) {
         Book book = bookDao.read(id);
-        return Objects.nonNull(book)? book.toString(): BOOK_NOT_FOUND_MESSAGE;
+        return Objects.nonNull(book) ? book.toString() : BOOK_NOT_FOUND_MESSAGE;
     }
 
-    @GetMapping(path = "/book/rating", produces = "text/plain;charset=UTF-8")
+    @GetMapping(path = "/book/rating", produces = "text/plain;charset=UTF-8")// równoważne z zapisem: @RequestMapping(path = "/book/rating", method = RequestMethod.GET)
     String getRatingList(@RequestParam("rating") int rating) {
         List<Book> books = bookDao.getRatingList(rating);
         return books.toString();
     }
+
     @PutMapping("/book}")
     public String updateBook(@RequestParam("id") long id, @RequestParam("title") String newTitle) {
         Book book = bookDao.read(id);
-        if(Objects.isNull(book)){
+        if (Objects.isNull(book)) {
             return BOOK_NOT_FOUND_MESSAGE;
         }
         book.setTitle(newTitle);
         bookDao.update(book);
         return book.toString();
     }
+
     @GetMapping(path = "/book/all")
     @ResponseBody
     public String findAllBooks() {
@@ -90,18 +96,18 @@ public class BookController {
 //        books.forEach(b -> logger.info(b.toString()));
         return Objects.nonNull(books) ? books.toString() : BOOK_NOT_FOUND_MESSAGE;
     }
+
     //DELETE /book/delete?id=1
     @DeleteMapping("/book/delete")
     @ResponseBody
     public String deleteBook(@RequestParam("id") long id) {
         Book book = bookDao.read(id);
-        if(Objects.isNull(book)){
+        if (Objects.isNull(book)) {
             return BOOK_NOT_FOUND_MESSAGE;
         }
         bookDao.delete(book);
         return " Book deleted";
     }
-
 
 
 }

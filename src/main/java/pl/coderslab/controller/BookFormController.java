@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 
-@AllArgsConstructor// Lombok powala, że nie trzeba używać konstruktora, trzeba usunąć kontruktor
+@AllArgsConstructor// Lombok pozwala, że nie trzeba używać konstruktora, trzeba usunąć kontruktor
 @Controller
 public class BookFormController {
     private final PublisherDao publisherDao;
@@ -36,6 +36,7 @@ public class BookFormController {
 //    }
     @GetMapping(path = "form/book/search", produces = "text/html;charset=UTF-8")
 //np. form/book/search?title=Thinking i Java
+    //Powszechnym i zalecanym sposobem przekazywania parametrów do widoku jest wykorzystanie obiektu klasy Model z pakietu: org.springframework.ui.Model;
     String findAllBooksByTitle(@RequestParam("title") String title, Model model) {
 //        List<Book> books = bookRepository.findAllByTitle(title);
         List<Book> books = bookRepository.findAllByTitleLike(title);//%25O%25 trzeba % szukany_znak % enkodować, bo % nie jest prawidłowym znakiem w url, użyć np strony: https://www.urlencoder.org/
@@ -46,33 +47,36 @@ public class BookFormController {
     //Listę książek dla zadanego autora.
     @GetMapping(path = "form/book/searchAuthor", produces = "text/html;charset=UTF-8")
     String findAllByAuthors(@RequestParam("authorID") Long id, Model model) {
-        Author author=new Author();
+        Author author = new Author();
         author.setId(id);
         List<Book> books = bookRepository.findAllByAuthors(author);
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "book/all";
     }
+
     //Listę książek dla zadanego wydawcy.
     @GetMapping(path = "form/book/searchPublisher", produces = "text/html;charset=UTF-8")
     String findAllByPublisher(@RequestParam("publisherID") Long id, Model model) {
-        Publisher publisher=new Publisher();
+        Publisher publisher = new Publisher();
         publisher.setId(id);
         List<Book> books = bookRepository.findAllByPublisher(publisher);
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "book/all";
     }
+
     //Listę książek dla danego ratingu.
     @GetMapping(path = "form/book/searchRating", produces = "text/html;charset=UTF-8")
     String findAllByRating(@RequestParam("rating") int rat, Model model) {
         List<Book> books = bookRepository.findAllByRating(rat);
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "book/all";
     }
 
+    //wyświetlanie formularaza dodawnia książki
     @GetMapping(path = "form/book", produces = "text/html;charset=UTF-8")
-    String showAddForm(Model model) {
+    String showAddForm(Model model) {//Model powala używać Spring's Form
         model.addAttribute("book", new Book());
-        return "book/add";
+        return "book/add";//nazwa widoku
     }
 
     @PostMapping(path = "form/book", produces = "text/html;charset=UTF-8")
@@ -119,16 +123,19 @@ public class BookFormController {
 
     @ModelAttribute("publishers")
     Collection<Publisher> findAllPublishers() {
+
         return publisherDao.findAllPublishers();
     }
 
     @ModelAttribute("authors")
     Collection<Author> findAllAuthors() {
+
         return authorDao.findAllAuthors();
     }
 }
 //Zadanie 1 - rozwiązywane z wykładowcą
-//W projekcie Spring01hibernate utwórz kontroler BookFormController, umieścimy w nim akcje odpowiedzialne za operacje na obiektach typu Book z wykorzystaniem formularzy.
+//W projekcie Spring01hibernate utwórz kontroler BookFormController,
+// umieścimy w nim akcje odpowiedzialne za operacje na obiektach typu Book z wykorzystaniem formularzy.
 //Utwórz formularz, który pozwoli dodać obiekt klasy Book.
 //Utwórz akcję wyświetlającą formularz.
 //Dodaj akcję obsługującą dane z formularza,
