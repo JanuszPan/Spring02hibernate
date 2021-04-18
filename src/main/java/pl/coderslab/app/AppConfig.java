@@ -17,6 +17,7 @@ import org.springframework.web.servlet.LocaleContextResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -38,6 +39,12 @@ import java.util.Locale;
 @EnableJpaRepositories(basePackageClasses = BookRepository.class)// Spring Data - wystarczy jeden przedstawiciel z pakietu
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
+
+    @Override
+    public  void addViewControllers(ViewControllerRegistry registry){
+        registry.addViewController("/auth/login");
+        registry.addViewController("/auth/403page");
+    }
 
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {

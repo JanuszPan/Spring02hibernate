@@ -43,14 +43,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //Pierwszą książkę z zadanej kategorii, z sortowaniem po tytule.
     Book findFirstByCategoryOrderByTitle(Category category);
 
-    @Query("select b from Book b where  b.rating between :min and :max")
-    List<Book> findByRat(@Param("rating") int min, int max);
-
-    @Query("select b from Book b where b.publisher.name=?1")
-    List<Book> findByPub(String publisherName);
-
-    @Query(value = "select  b from Book b where b.category = :category order by b.title")
-    List<Book> booksbyTitleLimit(@Param("category") Category category, Pageable pageable);
+//    @Query("select b from Book b where  b.rating between :min and :max")
+//    List<Book> findByRat(@Param("rating") int min, int max);
+//
+//    @Query("select b from Book b where b.publisher.name=?1")
+//    List<Book> findByPub(String publisherName);
+//
+//    @Query(value = "select  b from Book b where b.category = :category order by b.title")
+//    List<Book> booksbyTitleLimit(@Param("category") Category category, Pageable pageable);
 
 //    @Query(value = "SELECT * FROM books b JOIN category c on b.category_id = c.id where c.name = :categoryName ORDER BY b.title LIMIT 1",
 //            nativeQuery = true)

@@ -67,9 +67,9 @@ public class Author {
 //        this.lastName = lastName;
 //    }
 //
-//    public String getName() {
-//        return firstName + " " + lastName;
-//    }
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 //    public String getPesel() {
 //        return pesel;
 //    }
