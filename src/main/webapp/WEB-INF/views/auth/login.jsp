@@ -15,14 +15,14 @@
     <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Please sign in - custom login form</h2>
         <p>
-            <label for="username" class="sr-only">Username</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+            <label for="email" class="sr-only">Username</label>
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-        <input name="_csrf" type="hidden" value="fc0f4b3e-6a11-4254-894d-32970fbf612a" />
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>

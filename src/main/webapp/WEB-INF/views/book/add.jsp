@@ -23,5 +23,9 @@
                           itemValue="id" multiple="true"/><form:errors path="authors" cssClass="error"/>
     <input type="submit" value="Add book">
 </form:form>
+<form action="/auth/logout" method="post">
+    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

@@ -46,13 +46,13 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addViewController("/auth/403page");
     }
 
-    @Bean
-    public LocalEntityManagerFactoryBean entityManagerFactory() {
-        LocalEntityManagerFactoryBean entityManagerFactoryBean
-                = new LocalEntityManagerFactoryBean();
-        entityManagerFactoryBean.setPersistenceUnitName("springHibernatePersistenceUnit");
-        return entityManagerFactoryBean;
-    }
+//    @Bean
+//    public LocalEntityManagerFactoryBean entityManagerFactory() {
+//        LocalEntityManagerFactoryBean entityManagerFactoryBean
+//                = new LocalEntityManagerFactoryBean();
+//        entityManagerFactoryBean.setPersistenceUnitName("springHibernatePersistenceUnit");
+//        return entityManagerFactoryBean;
+//    }
 
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
